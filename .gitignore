@@ -1,0 +1,4 @@
+src/build/*
+src/experiment/dataset/longitude.csv
+src/experiment/dataset/longlat.csv
+src/experiment/dataset/newycsbdata.csv

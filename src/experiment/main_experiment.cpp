@@ -12,7 +12,6 @@
 #include <algorithm>
 #include <vector>
 
-#include "../baseline/workloads.h"
 #include "./experiment_params.h"
 #include "./functions.h"
 extern std::ofstream outRes;
@@ -92,57 +91,24 @@ void mainSynthetic(double initRatio, const std::vector<int> &length) {
     std::cout << "+++++++++++ uniform dataset ++++++++++++++++++++++++++"
               << std::endl;
     uniData.GenerateDataset(&initData, &testInsert);
-    if (r == 0) {
-      test_btree(true, initRatio, initData, testInsert, length);
-      test_btree(false, initRatio, initData, testInsert, length);
-      test_alex(true, initRatio, initData, testInsert, length);
-      test_alex(false, initRatio, initData, testInsert, length);
-      test_radix_spline(true, initRatio, initData);
-      test_radix_spline(false, initRatio, initData);
-    }
-
     CoreCARMI(false, initRatio, kRate, length, initData, testInsert);
     CoreCARMI(true, initRatio, kRate, length, initData, testInsert);
 
     std::cout << "+++++++++++ exponential dataset ++++++++++++++++++++++++++"
               << std::endl;
     expData.GenerateDataset(&initData, &testInsert);
-    if (r == 0) {
-      test_btree(true, initRatio, initData, testInsert, length);
-      test_btree(false, initRatio, initData, testInsert, length);
-      test_alex(true, initRatio, initData, testInsert, length);
-      test_alex(false, initRatio, initData, testInsert, length);
-      test_radix_spline(true, initRatio, initData);
-      test_radix_spline(false, initRatio, initData);
-    }
     CoreCARMI(false, initRatio, kRate, length, initData, testInsert);
     CoreCARMI(true, initRatio, kRate, length, initData, testInsert);
 
     std::cout << "+++++++++++ normal dataset ++++++++++++++++++++++++++"
               << std::endl;
     norData.GenerateDataset(&initData, &testInsert);
-    if (r == 0) {
-      test_btree(true, initRatio, initData, testInsert, length);
-      test_btree(false, initRatio, initData, testInsert, length);
-      test_alex(true, initRatio, initData, testInsert, length);
-      test_alex(false, initRatio, initData, testInsert, length);
-      test_radix_spline(true, initRatio, initData);
-      test_radix_spline(false, initRatio, initData);
-    }
     CoreCARMI(false, initRatio, kRate, length, initData, testInsert);
     CoreCARMI(true, initRatio, kRate, length, initData, testInsert);
 
     std::cout << "+++++++++++ lognormal dataset ++++++++++++++++++++++++++"
               << std::endl;
     logData.GenerateDataset(&initData, &testInsert);
-    if (r == 0) {
-      test_btree(true, initRatio, initData, testInsert, length);
-      test_btree(false, initRatio, initData, testInsert, length);
-      test_alex(true, initRatio, initData, testInsert, length);
-      test_alex(false, initRatio, initData, testInsert, length);
-      test_radix_spline(true, initRatio, initData);
-      test_radix_spline(false, initRatio, initData);
-    }
     CoreCARMI(false, initRatio, kRate, length, initData, testInsert);
     CoreCARMI(true, initRatio, kRate, length, initData, testInsert);
 
@@ -189,22 +155,12 @@ void mainMap(double initRatio, const std::vector<int> &length) {
     std::cout << "+++++++++++ longlat dataset ++++++++++++++++++++++++++"
               << std::endl;
     latData.GenerateDataset(&initData, &testInsert);
-    if (r == 0) {
-      // test_btree(true, initRatio, initData, testInsert, length);
-      // test_alex(true, initRatio, initData, testInsert, length);
-      // test_radix_spline(true, initRatio, initData);
-    }
     CoreCARMI(true, initRatio, kRate, length, initData, testInsert);
     // CoreCARMI(false, initRatio, kRate, length, initData, testInsert);
 
     std::cout << "+++++++++++ longitudes dataset ++++++++++++++++++++++++++"
               << std::endl;
     longData.GenerateDataset(&initData, &testInsert);
-    if (r == 0) {
-      // test_btree(true, initRatio, initData, testInsert, length);
-      // test_alex(true, initRatio, initData, testInsert, length);
-      // test_radix_spline(true, initRatio, initData);
-    }
     CoreCARMI(true, initRatio, kRate, length, initData, testInsert);
     // CoreCARMI(false, initRatio, kRate, length, initData, testInsert);
 
@@ -250,11 +206,6 @@ void mainYCSB(double initRatio, const std::vector<int> &length) {
     std::cout << "+++++++++++ ycsb dataset ++++++++++++++++++++++++++"
               << std::endl;
     ycsbData.GenerateDataset(&initData, &testInsert);
-    if (r == 0) {
-      // test_btree(true, initRatio, initData, testInsert, length);
-      // test_alex(true, initRatio, initData, testInsert, length);
-      // test_radix_spline(true, initRatio, initData);
-    }
     CoreExternalCARMI(true, initRatio, kRate, length, initData, testInsert);
 
     outRes << std::endl;

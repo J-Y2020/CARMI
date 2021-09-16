@@ -12,8 +12,11 @@
 #define SRC_INCLUDE_PARAMS_H_
 
 #define DEBUG
-// #define CHECK
-#define ARCH_HAS_PREFETCH
+// #define Windows
+
+#ifndef Windows
+#define Ubuntu
+#endif  // Windows
 
 namespace carmi_params {
 const int kMaxLeafNodeSize = 256;  // bytes, the size of a union in leaf nodes

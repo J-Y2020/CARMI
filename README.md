@@ -27,6 +27,8 @@ Use external index:
 #include "./include/carmi_external.h"
 ```
 
+If you want to run CARMI on Windows platform, please add ```#define Windows``` in the ```params.h``` file.
+
 ## Instructions
 
 **Method of constructing an index:**

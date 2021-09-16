@@ -50,7 +50,7 @@ inline int CARMI<KeyType, ValueType>::ExternalBinarySearch(double key,
 }
 
 template <typename KeyType, typename ValueType>
-__always_inline int CARMI<KeyType, ValueType>::SlotsUnionSearch(
+inline int CARMI<KeyType, ValueType>::SlotsUnionSearch(
     const LeafSlots<KeyType, ValueType> &node, KeyType key) {
   int i = kMaxSlotNum / 2 - 1;
   int end = kMaxSlotNum;

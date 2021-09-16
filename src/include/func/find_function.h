@@ -36,10 +36,29 @@ BaseNode<KeyType> *CARMI<KeyType, ValueType>::Find(KeyType key, int *currunion,
               root.PLRType<DataVectorType, KeyType>::model.PredictIdx(key);
           fetch_start = root.PLRType<DataVectorType, KeyType>::fetch_model
                             .PrefetchPredict(fetch_leafIdx);
+#ifdef Ubuntu
           __builtin_prefetch(&entireData[fetch_start], 0, 3);
-          // __builtin_prefetch(&entireData[fetch_start] + 64, 0, 3);
-          // __builtin_prefetch(&entireData[fetch_start] + 128, 0, 3);
-          // __builtin_prefetch(&entireData[fetch_start] + 192, 0, 3);
+          __builtin_prefetch(&entireData[fetch_start] + 64, 0, 3);
+          __builtin_prefetch(&entireData[fetch_start] + 128, 0, 3);
+          __builtin_prefetch(&entireData[fetch_start] + 192, 0, 3);
+#endif
+#ifdef Windows
+          _mm_prefetch(static_cast<char *>(
+                           static_cast<void *>(&entireData[fetch_start])),
+                       _MM_HINT_T1);
+          _mm_prefetch(static_cast<char *>(
+                           static_cast<void *>(&entireData[fetch_start])) +
+                           64,
+                       _MM_HINT_T1);
+          _mm_prefetch(static_cast<char *>(
+                           static_cast<void *>(&entireData[fetch_start])) +
+                           128,
+                       _MM_HINT_T1);
+          _mm_prefetch(static_cast<char *>(
+                           static_cast<void *>(&entireData[fetch_start])) +
+                           192,
+                       _MM_HINT_T1);
+#endif
         }
         type = entireChild[idx].lr.flagNumber >> 24;
         break;

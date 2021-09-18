@@ -29,8 +29,6 @@ class CARMIRoot : public PLRType<DataVectorType, KeyType> {
     this->flagNumber = node.flagNumber;
     this->childLeft = node.childLeft;
     this->type = node.flagNumber;
-    this->childNumber = node.childNumber;
-    this->isPrefetch = node.isPrefetch;
     return *this;
   }
 };

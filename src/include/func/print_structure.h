@@ -19,7 +19,7 @@ void CARMI<KeyType, ValueType>::PrintRoot(int level, int dataSize,
                                           std::vector<int> *levelVec,
                                           std::vector<int> *nodeVec) {
   std::vector<int> tree(8, 0);
-  int childNum = root.childNumber;
+  int childNum = root.model.length + 1;
   for (int i = 0; i < childNum; i++) {
     auto childIdx = root.childLeft + i;
     int t = (entireChild[childIdx].lr.flagNumber >> 24);
@@ -35,7 +35,7 @@ void CARMI<KeyType, ValueType>::PrintRoot(int level, int dataSize,
   if (tree[EXTERNAL_ARRAY_LEAF_NODE])
     std::cout << "\tycsb:" << tree[EXTERNAL_ARRAY_LEAF_NODE];
   std::cout << std::endl;
-  for (int i = 0; i < root.childNumber; i++) {
+  for (int i = 0; i < root.model.length + 1; i++) {
     auto childIdx = root.childLeft + i;
     NodeType t = NodeType(entireChild[childIdx].lr.flagNumber >> 24);
     if (t >= LR_INNER_NODE && t <= BS_INNER_NODE) {
@@ -85,7 +85,7 @@ void CARMI<KeyType, ValueType>::PrintStructure(int level, NodeType type,
   switch (type) {
     case PLR_ROOT_NODE: {
       std::cout << "level " << level << ": now root is plr, idx:" << idx
-                << ", number:" << root.childNumber;
+                << ", number:" << root.model.length + 1;
       PrintRoot(level, dataSize, levelVec, nodeVec);
       break;
     }

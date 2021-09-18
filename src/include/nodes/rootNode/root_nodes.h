@@ -27,14 +27,11 @@ class PLRType {
   PLRType() = default;
   explicit PLRType(int c) {
     flagNumber = (PLR_ROOT_NODE << 24);
-    childNumber = c;
-    isPrefetch = false;
+    model.length = c - 1;
   }
   PiecewiseLR<DataVectorType, KeyType> model;
   PrefetchPLR<DataVectorType, KeyType> fetch_model;  // 20 Byte
   int flagNumber;
-  int childNumber;
-  int childLeft;
-  bool isPrefetch;
+  int childLeft;  // start_index
 };
 #endif  // SRC_INCLUDE_NODES_ROOTNODE_ROOT_NODES_H_

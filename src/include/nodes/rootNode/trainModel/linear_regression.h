@@ -27,8 +27,7 @@ class LinearRegression {
     theta1 = 0.0001;
     theta2 = 0.666;
   }
-  void Train(const DataVectorType &dataset, int len) {
-    length = len - 1;
+  void Train(const DataVectorType &dataset) {
     int idx = 0;
     int size = dataset.size();
     std::vector<double> index(size, 0);
@@ -63,8 +62,9 @@ class LinearRegression {
     return p;
   }
 
- private:
   int length;
+
+ private:
   double theta1;
   double theta2;
 };

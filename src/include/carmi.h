@@ -31,7 +31,7 @@ class CARMI {
   typedef std::vector<DataType> DataVectorType;
 
  public:
-  CARMI() {}
+  CARMI();
 
   /**
    * @brief Construct a new CARMI object for carmi_common
@@ -128,7 +128,7 @@ class CARMI {
    */
   void Construction();
 
- private:
+ public:
   /**
    * @brief initialize entireData
    *
@@ -314,6 +314,7 @@ class CARMI {
    */
   void ReleaseMemory(int left, int size);
 
+ public:
   /**
    * @brief find the actual size in emptyBlocks
    *
@@ -540,19 +541,6 @@ class CARMI {
             ExternalArray *ext);
 
   /**
-   * @brief insert a data point into the previous structure in the leaf node
-   *
-   * @param data the data points needed to be inserted
-   * @param nowDataIdx the index of this structure in entireData
-   * @param currunion the index of the current structure in the leaf node
-   * @param node the leaf node
-   * @return true INSERT succeeds
-   * @return false INSERT fails (the previous structure is full)
-   */
-  // inline bool ArrayInsertPrevious(const DataType &data, int nowDataIdx,
-  //                                 int currunion, BaseNode<KeyType> *node);
-
-  /**
    * @brief insert a data point into the next structure in the leaf node
    *
    * @param data the data points needed to be inserted
@@ -665,6 +653,7 @@ class CARMI {
   bool CheckIsPrefetch(int neededLeafNum, int left, int size,
                        const DataVectorType &dataset);
 
+ public:
   /**
    * @brief store data points into the entireData
    *
@@ -700,6 +689,7 @@ class CARMI {
    */
   int ExternalBinarySearch(double key, int start, int end) const;
 
+ public:
   /**
    * @brief binary search within a structure
    *
@@ -916,6 +906,21 @@ const double CARMI<KeyType, ValueType>::kBaseNodeSpace = 64.0 / 1024 / 1024;
 template <typename KeyType, typename ValueType>
 const double CARMI<KeyType, ValueType>::kPLRRootSpace =
     sizeof(PLRType<DataVectorType, KeyType>) / 1024.0 / 1024.0;
+
+template <typename KeyType, typename ValueType>
+CARMI<KeyType, ValueType>::CARMI() {
+  isPrimary = false;
+  firstLeaf = -1;
+  nowDataSize = 0;
+  sumDepth = 0;
+  isInitMode = true;
+  prefetchEnd = -1;
+
+  emptyNode.array = ArrayType<KeyType>();
+  reservedSpace = 0;
+  readRate = 1.0;
+  InitEntireData(1000);
+}
 
 template <typename KeyType, typename ValueType>
 CARMI<KeyType, ValueType>::CARMI(DataVectorType &initData,

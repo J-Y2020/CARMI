@@ -48,11 +48,10 @@ class PiecewiseLR {
     }
   }
 
-  void Train(const DataVectorType &dataset, int len) {
+  void Train(const DataVectorType &dataset) {
     // train the original dataset
     int size = dataset.size();
     int point_num = point.size() + 1;  // 5
-    length = len - 1;
     DataVectorType data = dataset;
     for (int i = 0; i < size; i++) {
       data[i].second = static_cast<double>(i) / size * length;
@@ -199,9 +198,10 @@ class PiecewiseLR {
     return p;
   }
 
- private:
   int length;
-  std::vector<std::pair<double, int>> point;  // <key, boundary>
-  double theta[5][2];                         // {theta1, theta2}
+
+ private:
+  std::vector<std::pair<float, int>> point;  // <key, boundary>
+  float theta[5][2];                         // {theta1, theta2}
 };
 #endif  // SRC_INCLUDE_NODES_ROOTNODE_TRAINMODEL_PIECEWISELR_H_

@@ -30,7 +30,7 @@ void CARMI<KeyType, ValueType>::IsBetterRoot(int c, NodeType type,
   double space_cost = kBaseNodeSpace * c;
 
   TYPE root(c);
-  root.model.Train(initDataset, c);
+  root.model.Train(initDataset);
   IndexPair range(0, initDataset.size());
   NodePartition<ModelType>(root.model, range, initDataset, &perSize);
   for (int i = 0; i < c; i++) {
@@ -82,7 +82,7 @@ TYPE CARMI<KeyType, ValueType>::ConstructRoot(const RootStruct &rootStruct,
                                               SubDataset *subDataset) {
   TYPE root(rootStruct.rootChildNum);
   root.childLeft = AllocateChildMemory(rootStruct.rootChildNum);
-  root.model.Train(initDataset, rootStruct.rootChildNum);
+  root.model.Train(initDataset);
 
   NodePartition<ModelType>(root.model, range.initRange, initDataset,
                            &(subDataset->subInit));

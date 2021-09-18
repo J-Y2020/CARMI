@@ -162,8 +162,6 @@ inline void CARMI<KeyType, ValueType>::Construction() {
 
   int neededSize = nowDataSize + reservedSpace;
   if (!isPrimary) {
-    root.isPrefetch = true;
-
     if (neededSize < static_cast<int>(entireData.size())) {
       std::vector<LeafSlots<KeyType, ValueType>> tmpEntireData(
           entireData.begin(), entireData.begin() + neededSize);

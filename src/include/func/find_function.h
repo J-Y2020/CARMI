@@ -38,9 +38,9 @@ BaseNode<KeyType> *CARMI<KeyType, ValueType>::Find(KeyType key, int *currunion,
                             .PrefetchPredict(fetch_leafIdx);
 #ifdef Ubuntu
           __builtin_prefetch(&entireData[fetch_start], 0, 3);
-          __builtin_prefetch(&entireData[fetch_start] + 64, 0, 3);
-          __builtin_prefetch(&entireData[fetch_start] + 128, 0, 3);
-          __builtin_prefetch(&entireData[fetch_start] + 192, 0, 3);
+          // __builtin_prefetch(&entireData[fetch_start] + 64, 0, 3);
+          // __builtin_prefetch(&entireData[fetch_start] + 128, 0, 3);
+          // __builtin_prefetch(&entireData[fetch_start] + 192, 0, 3);
 #endif
 #ifdef Windows
           _mm_prefetch(static_cast<char *>(
